@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Layout with Flexbox </title>
+
+     <style>
+         *,*:before,*:after{
+             -moz-box-sizing: border-box;
+             -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+              padding: 0;
+              margin: 0;
+         }
+
+       html{
+           height: 100%;
+       }
+
+       body{
+           margin: 0;
+           padding: 0;
+           width: 100%;
+           height: 100%;
+           font-size: 100%;
+           line-height: 1.5;
+           overflow: hidden;
+           font-family: sans-serif, Serif, Roboto, “Segoe UI”,
+                       BlinkMacSystemFont, -apple-system, Helvetica;
+       }
+
+
+       .app-layout,[data-app-layout]{
+           display: flex;
+           flex-direction: column;
+           justify-content: flex-start;
+           align-items: center;
+           position: relative;
+       }
+
+         main{
+             flex: 1 1 0;
+             height: 100%;
+             max-height: 100%;
+             overflow-y: auto;
+         }
+
+       main,header,footer{
+           display: flex;
+           width: 100%;
+           position: relative;
+           padding: 1em;
+           align-items: center;
+           justify-content: center;
+           vertical-align: center;
+       }
+
+         header,footer{
+             justify-content: flex-start;
+             align-items: center;
+             vertical-align: center;
+         }
+
+
+
+         .aside-left{
+           background-color: #ffffff;
+           position: absolute;
+           justify-content: center;
+           align-items: center;
+           height: 100%;
+           top: 0;
+           left: -400px;
+           width: 300px;
+           max-width: 300px;
+           z-index: 10;
+           opacity: 1;
+           padding:2em 1em 1em 1em;
+
+           -webkit-box-shadow: 7px 0 7px rgba(0,0,0,.17);
+           -moz-box-shadow: 7px 0 7px rgba(0,0,0,.17);
+           box-shadow: 7px 0 7px rgba(0,0,0,.17);
+      }
+
+
+         .aside-open-link{
+             width: 3em;
+             height: 3em;
+             justify-content: center;
+             align-items: center;
+             vertical-align: center;
+             background-color: #020202;
+
+         }
+
+         .aside-close-link{
+             position: absolute;
+             top: 0.5em;
+             right: 0.5em;
+             width: 1.5em;
+             height: 1.5em;
+         }
+
+         .aside-open-link,.aside-close-link{
+             display: flex;
+             flex-direction:column ;
+             justify-content: center;
+             align-items: center;
+             vertical-align: center;
+             background-color: #020202;
+             text-decoration: none;
+             color: white;
+         }
+
+
+         .aside-open-link span{
+             display: block;
+             height: 2px;
+             width:  50%;
+             margin-bottom: 2px;
+             background-color: #ffffff;
+             color: #ffffff;
+         }
+
+
+
+         header .aside-open-link{
+             margin-right: 3.5em;
+         }
+
+         header h1,footer h6{
+             margin: 0;
+             padding: 0;
+         }
+         header h1{
+             font-size: 1.25em;
+         }
+
+
+         footer h6{
+             font-size: 0.75em;
+         }
+
+         .shadow {
+             -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.17) ;
+             -moz-box-shadow: 0 1px 5px rgba(0,0,0,.17) ;
+             box-shadow: 0 1px 5px 	rgba(0,0,0,.17) ;
+         }
+
+
+     </style>
+</head>
+<body data-app-layout >
+    <header class="shadow">
+        <a class="aside-open-link" href="#">
+           <span></span>
+           <span></span>
+           <span></span>
+        </a>
+        <h1>Layout with Flexbox</h1>
+    </header>
+    <main>Main Content</main>
+
+    <aside class="aside-left">
+       <a class="aside-close-link" href="#">X</a>
+       <span>Aside</span>
+    </aside>
+    <footer class="shadow"><h6>2020-09-06</h6></footer>
+     <script>
+         (function toggleAside(){
+            const aside= document.getElementsByClassName("aside-left")[0];
+            const linkOpen=document.getElementsByClassName("aside-open-link")[0];
+            const linkClose=document.getElementsByClassName("aside-close-link")[0];
+
+             linkClose.addEventListener('click',function(e){
+                 aside.style.left='-400px';
+                 aside.style.transition="left 2s";
+             });
+
+            linkOpen.addEventListener('click',function(e){
+                  e.preventDefault();
+                  aside.style.left='0';
+                  aside.style.transition="left 2s";
+             });
+         }());
+
+     </script>
+</body>
+</html>
+
